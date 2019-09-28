@@ -1,0 +1,19 @@
+<%= image_tag 'pic1.PNG' , :size => "300x300" %>
+<h3>
+    <%= form_for :post, url:is_obstruction_path do |f| %>
+     <p>
+        <%= f.label :Point_A %><br>
+        <%= f.text_field :PointA %><br> 
+     </p> 
+
+     <p>
+        <%= f.label :Point_B %><br>
+        <%= f.text_field :PointB %><br> 
+     </p>     
+
+     <p>
+        <%= f.submit %> 
+     </p>
+         
+    <%end%>
+</h3>

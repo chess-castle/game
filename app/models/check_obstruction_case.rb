@@ -1,0 +1,2 @@
+class CheckObstructionCase < ApplicationRecord
+end
