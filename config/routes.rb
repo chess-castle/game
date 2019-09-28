@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'ctest#index'
+
+  resources :gameboard, :show 
   
   get 'input_PointA_PointB' => 'check_obstruction_cases#input_PointA_PointB' 
   post 'is_obstruction' => 'check_obstruction_cases#is_obstruction'
