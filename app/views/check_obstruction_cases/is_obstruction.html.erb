@@ -1,0 +1,97 @@
+<div>
+    <%= link_to "BACK",  input_PointA_PointB_path %>
+</div>
+<%= image_tag 'pic1.PNG' , :size => "300x300" %>
+<h3>
+    
+    <br>
+    <%="Point A : "+@PointA %>
+    <br>
+    <%="Point B : "+@PointB %>
+    <br>
+
+     <% @Points='' %>
+     <% start=-10%>
+     <% x=@X.split('')%>
+     <% x.each do |l| %>  
+     <% start=0 if (@PointB[0]==l|| @PointA[0]==l) %>
+     <% break if (start==0 && @Points!='') %>
+     <% @Points+=l if start>0%>
+     <% start+=1 %>
+     <% end %>
+
+
+     <% @Points2='' %>
+     <% start=-10%>
+     <% y=@Y.split('')%>
+     <% y.each do |l| %>  
+     <% start=0 if (@PointB[1]==l|| @PointA[1]==l) %>
+     <% break if (start==0 && @Points2!='') %>
+     <% @Points2+=l if start>0%>
+     <% start+=1 %>
+     <% end %>
+
+     <% x=@Points.split('') %>
+
+     <% y=@Points2.split('') %>
+ 
+   <% if(@PointA[0] == @PointB[0] && @PointA[1] != @PointB[1]) # VERTICAL OBSTRUCTION %>   
+        <% exist=0%>
+        <% y.each do |t|%>
+        <% r = t.to_s %> 
+        <%= r= @PointA[0]+r %>
+        <%= ":" %>
+        <% exist+=1 if @position[r]!= "" %>
+        <%=@position[r] if @position[r]!= "" %>
+        <br>
+        <% end %>
+        <%="VERTICAL_OBSTRUCTION : TRUE" if exist>0 %>
+        <%="VERTICAL_OBSTRUCTION : FALSE" if exist==0 %>
+
+
+   <% elsif( @PointA[0]!= @PointB[0] && @PointA[1]==@PointB[1]) # HORIZONTAL OBSTRUCTION %>
+   
+        <% exist=0%>
+        <% x.each do |t|%>
+        <%r = t.to_s%> 
+        <%=r= r+@PointA[1] %>
+        <%= ":" %>
+        <% exist+=1 if @position[r]!= "" %>
+        <%=@position[r] if @position[r]!= "" %>
+        <br>
+        <% end %>
+        <%="HORIZONTAL_OBSTRUCTION : TRUE" if exist>0 %>
+        <%="HORIZONTAL_OBSTRUCTION : FALSE" if exist==0 %>             
+  
+   <% elsif(@PointA[0]!= @PointB[0] && @PointA[1]!= @PointB[1] )   # DIAGONAL OR INVALID%>
+         
+        <% exist=0%>
+        <% a=@PointA[1].to_i%>
+        <% b=@PointB[1].to_i%>  
+        <%k=a if a<b %>
+        <%k=b if a>b %>
+
+        <% if ((a-b).abs-1)==@Points.length # DIAGONAL OBSTRUCTION %>
+        <% x.each do |l| %>
+        <%k=k+1%>
+        <%r = k.to_s %>
+        <%=r=l+r%> 
+        <%= ":" %>
+        <% exist+=1 if @position[r]!= "" %>
+        <%=@position[r] if @position[r]!= "" %>
+        <br>
+        <% end %>
+        <%="DIAGONAL_OBSTRUCTION : TRUE" if exist>0 %>
+        <%="DIAGONAL_OBSTRUCTION : FALSE" if exist==0 %>   
+
+        <%else                               # INVALID INPUT%>
+        <%="Invalid input" %>             
+        <% end %> 
+
+   <% else  # INVALID OBSTRUCTION  %>
+      
+    <%="Invalid input" %>
+   
+   <% end %>
+  
+</h3>
