@@ -15,3 +15,8 @@
 <%= link_to 'Sign Up', new_user_registration_path, class: 'navbar-brand' %> <br />
 <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
 <% end %>
+
+<h1>Games Available <%= Game.available.count do |game| %>
+  
+  <% end %>
+ 
