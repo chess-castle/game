@@ -1,9 +1,9 @@
 class Game < ApplicationRecord
   has_many :pieces
   has_many :users
-  #scope :avaliable ~>{ where(avaliable: true ) }
+  scope :available, -> { where('white_player_id IS NULL or black_player_id IS NULL') }
   #where(users.length == 1) should be updated?
-  #scope :unavaliable ~>{ where(avaliable: [nil, false] ) }
+  #scope :unavailable ~>{ where(avaliable: [nil, false] ) }
 
   after_create :populate
 
