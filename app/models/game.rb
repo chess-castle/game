@@ -2,8 +2,7 @@ class Game < ApplicationRecord
   has_many :pieces
   has_many :users
   scope :available, -> { where('white_player_id IS NULL or black_player_id IS NULL') }
-  #where(users.length == 1) should be updated?
-  #scope :unavailable ~>{ where(avaliable: [nil, false] ) }
+  
 
   after_create :populate
 
@@ -11,60 +10,60 @@ class Game < ApplicationRecord
     #setup board
     #white pieces
       #pawns
-      (1..8).each do |x|
+      (0..7).each do |x|
         Pawn.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id, piece_type: "Pawn_white")
       end
 
       #rooks
-      [1, 8].each do |x|
-        Rook.create(game_id: id, x_position: x, y_position: 8, user_id: white_player_id, piece_type: "Rook_white")
+      [0, 7].each do |x|
+        Rook.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id, piece_type: "Rook_white")
       end
    
       #Knights
-      [2, 7].each do |x|
-        Knight.create(game_id: id, x_position: x, y_position: 8, user_id: white_player_id, piece_type: "Knight_white")
+      [1, 6].each do |x|
+        Knight.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id, piece_type: "Knight_white")
       end
 
       #Bishops
-      [3, 6].each do |x|
-        Bishop.create(game_id: id, x_position: x, y_position: 8, user_id: white_player_id, piece_type: "Bishop_white")
+      [2, 5].each do |x|
+      Bishop.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id, piece_type: "Bishop_white")
       end
 
       #King
-      King.create(game_id: id, x_position: 5, y_position: 8, user_id: white_player_id, piece_type: "King_white")
+      King.create(game_id: id, x_position: 4, y_position: 7, user_id: white_player_id, piece_type: "King_white")
       
       #Queen
-      Queen.create(game_id: id, x_position: 4, y_position: 8, user_id: white_player_id, piece_type: "Queen_white")
+      Queen.create(game_id: id, x_position: 3, y_position: 7, user_id: white_player_id, piece_type: "Queen_white")
       
 
 
       #black peices
-      #white pieces
+     
       #pawns
-      (1..8).each do |x|
+      (0..7).each do |x|
         Pawn.create(game_id: id, x_position: x, y_position: 2, user_id: black_player_id, piece_type: "Pawn_black")
       end
 
       #rooks
-      [1, 8].each do |x|
-        Rook.create(game_id: id, x_position: x, y_position: 1, user_id: black_player_id, piece_type: "Rook_black")
+      [0, 7].each do |x|
+        Rook.create(game_id: id, x_position: x, y_position: 0, user_id: black_player_id, piece_type: "Rook_black")
       end
    
       #Knights
-      [2, 7].each do |x|
-        Knight.create(game_id: id, x_position: x, y_position: 1, user_id: black_player_id, piece_type: "Knight_black")
+      [1, 6].each do |x|
+        Knight.create(game_id: id, x_position: x, y_position: 0, user_id: black_player_id, piece_type: "Knight_black")
       end
 
       #Bishops
-      [3, 6].each do |x|
-        Bishop.create(game_id: id, x_position: x, y_position: 1, user_id: black_player_id, piece_type: "Bishop_black")
+      [2, 5].each do |x|
+        Bishop.create(game_id: id, x_position: x, y_position: 0, user_id: black_player_id, piece_type: "Bishop_black")
       end
 
       #King
-      King.create(game_id: id, x_position: 5, y_position: 1, user_id: black_player_id, piece_type: "King_black")
+      King.create(game_id: id, x_position: 3, y_position: 0, user_id: black_player_id, piece_type: "King_black")
       
       #Queen
-      Queen.create(game_id: id, x_position: 4, y_position: 1, user_id: black_player_id, piece_type: "Queen_black")
+      Queen.create(game_id: id, x_position: 4, y_position: 0, user_id: black_player_id, piece_type: "Queen_black")
 
   end
 
@@ -76,4 +75,11 @@ class Game < ApplicationRecord
     User.find_by_id(black_player_id)
   end
 
+  def is_occupied(x, y)
+    !!get_piece_at_location(x, y)
+  end
+
+  def get_piece_at_location(x, y)
+
+  end
 end
