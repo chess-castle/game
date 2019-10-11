@@ -1,5 +1,5 @@
 class GameboardController < ApplicationController
-  #before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:update]
   #eventually enable devise to stop actions without authentication prior
 
   def new
