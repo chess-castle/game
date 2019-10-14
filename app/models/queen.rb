@@ -9,11 +9,11 @@ class Queen < Piece
       return true
 
     # Horizontal
-    elsif (x_travel >= 1 && y_travel = 0) && x_travel(new_x) && new_x >= 0 && new_x <= 7
+    elsif (x_travel >= 1 && y_travel == 0) && x_travel(new_x) && new_x >= 0 && new_x <= 7
       return true
 
     # Vertical
-    elsif (x_travel =0 && y_travel >= 1) && y_travel(new_y) && new_y >=0 && new_y <= 7
+    elsif (x_travel == 0 && y_travel >= 1) && y_travel(new_y) && new_y >=0 && new_y <= 7
       return true
     else
       return false
