@@ -11,29 +11,29 @@ class Game < ApplicationRecord
     #white pieces
       #pawns
       (0..7).each do |x|
-        Pawn.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id, piece_type: "Pawn_white")
+        Pawn.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id)
       end
 
       #rooks
       [0, 7].each do |x|
-        Rook.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id, piece_type: "Rook_white")
+        Rook.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id)
       end
    
       #Knights
       [1, 6].each do |x|
-        Knight.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id, piece_type: "Knight_white")
+        Knight.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id)
       end
 
       #Bishops
       [2, 5].each do |x|
-      Bishop.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id, piece_type: "Bishop_white")
+      Bishop.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id)
       end
 
       #King
-      King.create(game_id: id, x_position: 4, y_position: 7, user_id: white_player_id, piece_type: "King_white")
+      King.create(game_id: id, x_position: 4, y_position: 7, user_id: white_player_id)
       
       #Queen
-      Queen.create(game_id: id, x_position: 3, y_position: 7, user_id: white_player_id, piece_type: "Queen_white")
+      Queen.create(game_id: id, x_position: 3, y_position: 7, user_id: white_player_id)
       
 
 
@@ -41,29 +41,29 @@ class Game < ApplicationRecord
      
       #pawns
       (0..7).each do |x|
-        Pawn.create(game_id: id, x_position: x, y_position: 2, user_id: black_player_id, piece_type: "Pawn_black")
+        Pawn.create(game_id: id, x_position: x, y_position: 2, user_id: black_player_id)
       end
 
       #rooks
       [0, 7].each do |x|
-        Rook.create(game_id: id, x_position: x, y_position: 0, user_id: black_player_id, piece_type: "Rook_black")
+        Rook.create(game_id: id, x_position: x, y_position: 0, user_id: black_player_id)
       end
    
       #Knights
       [1, 6].each do |x|
-        Knight.create(game_id: id, x_position: x, y_position: 0, user_id: black_player_id, piece_type: "Knight_black")
+        Knight.create(game_id: id, x_position: x, y_position: 0, user_id: black_player_id)
       end
 
       #Bishops
       [2, 5].each do |x|
-        Bishop.create(game_id: id, x_position: x, y_position: 0, user_id: black_player_id, piece_type: "Bishop_black")
+        Bishop.create(game_id: id, x_position: x, y_position: 0, user_id: black_player_id)
       end
 
       #King
-      King.create(game_id: id, x_position: 3, y_position: 0, user_id: black_player_id, piece_type: "King_black")
+      King.create(game_id: id, x_position: 3, y_position: 0, user_id: black_player_id)
       
       #Queen
-      Queen.create(game_id: id, x_position: 4, y_position: 0, user_id: black_player_id, piece_type: "Queen_black")
+      Queen.create(game_id: id, x_position: 4, y_position: 0, user_id: black_player_id)
 
   end
 
