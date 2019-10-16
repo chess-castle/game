@@ -33,4 +33,8 @@ class User < ApplicationRecord
     end
   end
 
+  #working on this
+  #def color(game_id)
+  #  King.where(user_id: current_user.id, game_id: game_id).color
+  #end
 end
