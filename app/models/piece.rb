@@ -57,6 +57,6 @@ class Piece < ApplicationRecord
   end
 
   def color
-    
+    #need new column on piece for color
   end
 end
