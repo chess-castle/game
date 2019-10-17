@@ -40,11 +40,10 @@ class Piece < ApplicationRecord
   def y_travel(new_y)
     y_travel = (new_y - y_position).abs
   end
-
+  
   def can_move_to(new_x, new_y)
     #check if piece moves that way use valid_move?
     #is there anything along the way
-
 
   end
 
