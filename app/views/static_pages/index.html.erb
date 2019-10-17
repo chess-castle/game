@@ -13,5 +13,21 @@
 
 <% else %>
 <%= link_to 'Sign Up', new_user_registration_path, class: 'navbar-brand' %> <br />
+<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %> <br />
 <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
 <% end %>
+
+<h1>Games Available </h1>
+<% @games.each do |game| %>
+    <%= game.name %>
+      <%= simple_form_for game, url: gameboard_path(game) do |f| %>
+        <%= f.hidden_field :black_player_id, :method => :patch ,  :value => current_user.id  %>
+        <%= f.submit "Join game", class: "btn btn-secondary" %>
+      <% end %>
+    <br />
+    <p>White player ID</p> <%= game.white_player_id %>
+    <p>Black Player ID</p> <%= game.black_player_id %>
+    <br />
+    
+<% end %>
+ 
