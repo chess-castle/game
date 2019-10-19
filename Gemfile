@@ -61,6 +61,7 @@ group :test do
 end
 
 gem 'devise'
+gem 'omniauth-facebook'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
