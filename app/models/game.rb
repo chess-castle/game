@@ -11,7 +11,7 @@ class Game < ApplicationRecord
     #white pieces
       #pawns
       (0..7).each do |x|
-        Pawn.create(game_id: id, x_position: x, y_position: 7, user_id: white_player_id, color: "white")
+        Pawn.create(game_id: id, x_position: x, y_position: 6, user_id: white_player_id, color: "white")
       end
 
       #rooks
@@ -65,6 +65,7 @@ class Game < ApplicationRecord
       #Queen
       Queen.create(game_id: id, x_position: 4, y_position: 0, user_id: black_player_id, color: "black")
 
+      current_turn = white_player_id
   end
 
   def white_player
@@ -73,6 +74,14 @@ class Game < ApplicationRecord
 
   def black_player
     User.find_by_id(black_player_id)
+  end
+
+  def whos_turn!
+    if current_turn != "white"
+      self.update_attribute(:current_turn, "white")
+    elsif current_turn != "black"
+      self.update_attribute(:current_turn, "black")
+    end
   end
 
   def is_occupied(x, y)
