@@ -65,7 +65,6 @@ class Game < ApplicationRecord
       #Queen
       Queen.create(game_id: id, x_position: 4, y_position: 0, user_id: black_player_id, color: "black")
 
-      current_turn = white_player_id
   end
 
   def white_player
