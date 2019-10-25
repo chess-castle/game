@@ -90,4 +90,18 @@ class Game < ApplicationRecord
   def get_piece_at_location(x, y)
 
   end
+
+  def in_check?
+    x_king = King.x_position
+    y_king = King.y_position
+ 
+    if !user_id
+      self.game.pieces.each do |piece|
+        if piece.valid_move?(x_king, y_king)
+          return true
+        end
+      end
+    end 
+    return false
+  end
 end
