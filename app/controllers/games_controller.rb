@@ -21,6 +21,23 @@ class GamesController < ApplicationController
   def update
   end
 
+  def piece_movement
+  
+  respond_to :js, :htmls
+     
+      pID=params[:idP]
+      xPOS=params[:xPosition]
+      yPOS=params[:yPosition]
+      game_ID=params[:game_Id]
+  
+     if d=Piece.find_by_id_and_game_id(pID,game_ID)
+      if d.valid_move?(xPOS.to_i,yPOS.to_i)==true
+       d.move_to!(xPOS,yPOS)
+      end
+     end
+      render :show
+  end
+
   private
 
   def game
