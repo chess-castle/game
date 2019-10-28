@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   resources :gameboard, :show 
-  
+  resources :games
+ 
+  post 'piece_movement' => 'games#piece_movement'
   
 
 

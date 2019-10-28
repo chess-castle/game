@@ -1,0 +1,173 @@
+
+<html>
+ <head>   
+
+
+  <script type="text/javascript">
+ 
+    var moves=0;
+    c=0;
+    r=0;
+    c1=0;
+    r1=0;
+
+ 
+     $(function(){
+        
+     $('div').on('dblclick', function(){
+
+     game_id=($(this).attr('game_id')).toString(); 
+     id1=($(this).attr('ida')).toString();
+    
+    
+    
+        $('div').on('click', function(){
+             
+
+             $.post("/piece_movement", {idP:parseInt(id1), xPosition:$(this).attr('column'), yPosition:$(this).attr('row'), game_Id:parseInt(game_id)});
+             location.reload();
+
+              
+           
+        });
+
+    });
+   
+    
+
+     $('img').on('dblclick', function(){
+     image=$(this).attr('src')
+     id=$(this).attr('id')
+     moves=1    
+
+        $('img').on('click', function(){
+            mv=$(this).attr('data');     
+            if(moves==1){
+            
+            moves=0;  
+            }
+            y_id=parseInt(id[0]);
+            x_id=parseInt(id[1]);
+            
+
+          
+            });
+
+     });
+
+
+
+  
+     $('.square').on('dblclick', function(){ 
+     $('.square').css({'background-color' : 'white'}); 
+     $('.square-grey').css({'background-color' : 'grey'}); 
+     $(this).css({'background-color' : 'green'});
+    });
+
+
+
+
+     $('.square-grey').on('dblclick', function(){
+     $('.square-grey').css({'background-color' : 'grey'}); 
+     $('.square').css({'background-color' : 'white'}); 
+     $(this).css({'background-color' : 'green'});
+    });
+   
+
+   
+  });
+
+
+
+
+  </script>
+
+ </head>
+<body>
+ </body>
+
+ <%=@result%>
+
+<%@occupied=false%>
+
+<%nclass="square-grey".to_s%>
+<div id="board">
+    <%[0,1,2,3,4,5,6,7].each do |y|%>
+    <%[0,1,2,3,4,5,6,7].each do |x|%>
+
+             <%if nclass=="square"%> 
+                <%nclass="square-grey"%>
+                <%else%>
+                <%nclass="square"%>
+             <%end%> 
+         <%if p=@pieces.find_by(:x_position => x, :y_position => y)%>
+            <% @piece_id= p.id%>
+            <% @name=p.type.to_s%>
+            <% @c=p.x_position.to_s%>
+            <% @r=p.y_position.to_s%>
+            <% @game_id=p.game_id%>
+            <% @pcs=p%>
+
+                <%if @occupied==false%>
+                <% @white_player=p.user_id %>
+                <% @color="black"%>
+                <% @occupied=true%>
+                <% end%>
+                
+                <% if p.user_id != @white_player%>
+                <% @black_player=p.user_id%>
+                <% @color="black"%>
+                <% else %>
+                <% @white_player=p.user_id%>
+                <% @color="white"%> 
+                <% end%> 
+
+
+                <%@image="/assets/"+@color+@name+".png".to_s %>
+            <%else%>
+            <% @piece_id=0%>
+            <% @name=nil%>
+            <% @c=x%>
+            <% @r=y%>
+            <% @pcs=nil%>
+            <% @image="/assets/Nothing11.png" %>
+            <% @game_id=nil%>
+         <%end%>
+                
+                
+                
+            
+         <%@id_img = @r.to_s+@c.to_s%>  
+        <div ida=<%=@piece_id%> row=<%=@r%> column=<%=@c%> class=<%=nclass%> player=<%=@color%> piece=<%=@name%> code=<%=@id_imgs%> pieces=<%=@pieces%> game_id=<%=@game_id%> ><img alt=<%=@id_img%> src=<%=@image%>  id=<%=@id_img%> />
+
+
+        </div>
+
+
+
+    <%end%>
+    <br>
+            <%if nclass=="square"%> 
+                 <%nclass="square-grey"%>
+                 <%else%>
+                 <%nclass="square"%>
+             <%end%> 
+    <%end%>
+
+
+     
+
+ </div>  
+
+   
+</html>
+
+
+
+
+
+
+
+
+
+

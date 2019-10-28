@@ -1,27 +1,32 @@
 class Piece < ApplicationRecord
  #belongs_to :users
- def move_to!(new_x, new_y)
+  def move_to!(new_x, new_y)
 
    if d=Piece.find_by(:x_position => new_x, :y_position => new_y)
      userID=d.user_id
      gameID=d.game_id
-     
+     moveS=d.moves
+
     if gameID==self.game_id && self.user_id!=userID # if GAME IS SAME AND Black vs White pieces
      
      self.x_position=new_x
      self.y_position=new_y
+     self.moves=moveS.to_i+1
      self.save
      d.destroy
+     return true
 
     else   # if GAME IS NOT SAME or SAME User's pieces         
-      "FAIL"
+      return false
 
     end 
 
    else  # NO PIECE LOCATED THERE 
      self.x_position=new_x
      self.y_position=new_y
+     self.moves=moveS.to_i+1
      self.save
+     return true
    end
  
   end 
