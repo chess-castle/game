@@ -92,21 +92,19 @@ class Game < ApplicationRecord
   end
 
   def in_check?
-    if current_turn == "white" 
-      @king = King.where(color:"black")
+    if current_turn == "black" 
+      @king = King.find_by_color("black")
     else
-      @king = King.where(color:"white")
+      @king = King.find_by_color("white")
     end
-    # puts current_turn
-    # if user_id = current_turn
-      self.pieces.each do |piece|
-        if piece.color == current_turn
+      pieces.each do |piece|
+        if piece.find_by_color(current_turn.to_s)
           if piece.valid_move?(@king.x_position, @king.y_position)
             return true
+          else
+            return false
           end
         end
       end
-    # end 
-    return false
   end
 end
