@@ -93,9 +93,9 @@ class Game < ApplicationRecord
 
   def in_check?
     if current_turn == "black" 
-      @king = King.find_by_color("black")
+      @king = King.where(color:"black").present?
     else
-      @king = King.find_by_color("white")
+      @king = King.where(color:"white").present?
     end
       pieces.each do |piece|
         if piece.find_by_color(current_turn.to_s)
