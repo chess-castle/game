@@ -1,5 +1,8 @@
 class Piece < ApplicationRecord
  #belongs_to :users
+ scope :white, -> { where(color: 'white') }
+ scope :black, -> { where(color: 'black') }
+
   def move_to!(new_x, new_y)
 
    if d=Piece.find_by(:x_position => new_x, :y_position => new_y)
