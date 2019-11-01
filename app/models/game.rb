@@ -96,19 +96,14 @@ class Game < ApplicationRecord
   def in_check?
     enemy_pieces = []
     #figure out whos turn it is to know what king to check for check
-    if current_turn == "black" 
-      @king = pieces.black.find_by_type("King")
-      
-    else
-      @king = pieces.white.find_by_type("King")
-      
-    end
-    
+       
+    king = King.where(color: current_turn).first
+
     #make an array of peices not matching our color
     enemy_pieces = pieces.where.not(color: current_turn)
     #check each peice to see if king position is a valid move
       enemy_pieces.each do |piece|
-        if piece.valid_move?(@king.x_position, @king.y_position)
+        if piece.valid_move?(king.x_position, king.y_position)
           #need to check if piece is obstructed of not return true.
           return true
         end
