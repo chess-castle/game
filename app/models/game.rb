@@ -84,8 +84,11 @@ class Game < ApplicationRecord
     end
   end
 
-  def is_occupied(x, y)
-    !!get_piece_at_location(x, y)
+  def is_occupied?(x, y) 
+    pieces.each do |piece|
+      return true if piece.x_position == x && piece.y_position == y
+    end
+    return false
   end
 
   def get_piece_at_location(x, y)
@@ -103,9 +106,10 @@ class Game < ApplicationRecord
       @king = pieces.white.find_by_type("King")
       
     end
-    
+    puts pieces
     #make an array of peices not matching our color
     enemy_pieces = pieces.where.not(color: current_turn)
+    puts enemy_pieces
     #check each peice to see if king position is a valid move
       enemy_pieces.each do |piece|
         if piece.valid_move?(@king.x_position, @king.y_position)
