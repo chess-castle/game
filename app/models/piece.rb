@@ -1,5 +1,9 @@
 class Piece < ApplicationRecord
  #belongs_to :users
+  
+ scope :white, -> { where(color: 'white') }
+ scope :black, -> { where(color: 'black') }
+
   def move_to!(new_x, new_y)
 
    if d=Piece.find_by(:x_position => new_x, :y_position => new_y)
@@ -30,7 +34,7 @@ class Piece < ApplicationRecord
    end
  
   end 
-  
+
   #if both travels are equal you are going diagonally
   def diagonal?(x_travel, y_travel)
     x_travel == y_travel
@@ -63,4 +67,8 @@ class Piece < ApplicationRecord
   def color
     #need new column on piece for color
   end
+
+  
+
+
 end
